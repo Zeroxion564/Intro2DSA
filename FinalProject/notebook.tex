@@ -1,0 +1,1711 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{FinalProject}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pnd}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}\PY{p}{;} \PY{n}{sns}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{p}{)}
+        
+        \PY{n}{sns}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{n}{style}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{darkgrid}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    Data Set 1 Link:
+https://data.ny.gov/Government-Finance/Total-Income-And-Tax-Liability-By-Place-Of-Residen/nacg-rg66
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{df1} \PY{o}{=} \PY{n}{pnd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{NYTaxes.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{df1}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:}       Tax Year          Resident Type                  Place of Residence  \textbackslash{}
+        0         2011     Full-Year Resident               New York City - Bronx   
+        1         2011     Full-Year Resident               New York City - Kings   
+        2         2011     Full-Year Resident           New York City - Manhattan   
+        3         2011     Full-Year Resident              New York City - Queens   
+        4         2011     Full-Year Resident            New York City - Richmond   
+        5         2011     Full-Year Resident                Total, New York City   
+        6         2011     Full-Year Resident                              Albany   
+        7         2011     Full-Year Resident                            Allegany   
+        8         2011     Full-Year Resident                              Broome   
+        9         2011     Full-Year Resident                         Cattaraugus   
+        10        2011     Full-Year Resident                              Cayuga   
+        11        2011     Full-Year Resident                          Chautauqua   
+        12        2011     Full-Year Resident                             Chemung   
+        13        2011     Full-Year Resident                            Chenango   
+        14        2011     Full-Year Resident                             Clinton   
+        15        2011     Full-Year Resident                            Columbia   
+        16        2011     Full-Year Resident                            Cortland   
+        17        2011     Full-Year Resident                            Delaware   
+        18        2011     Full-Year Resident                            Dutchess   
+        19        2011     Full-Year Resident                                Erie   
+        20        2011     Full-Year Resident                               Essex   
+        21        2011     Full-Year Resident                            Franklin   
+        22        2011     Full-Year Resident                              Fulton   
+        23        2011     Full-Year Resident                             Genesee   
+        24        2011     Full-Year Resident                              Greene   
+        25        2011     Full-Year Resident                            Hamilton   
+        26        2011     Full-Year Resident                            Herkimer   
+        27        2011     Full-Year Resident                           Jefferson   
+        28        2011     Full-Year Resident                               Lewis   
+        29        2011     Full-Year Resident                          Livingston   
+        {\ldots}        {\ldots}                    {\ldots}                                 {\ldots}   
+        1834      2014  Full-Year Nonresident                      South Carolina   
+        1835      2014  Full-Year Nonresident                        South Dakota   
+        1836      2014  Full-Year Nonresident                           Tennessee   
+        1837      2014  Full-Year Nonresident                               Texas   
+        1838      2014  Full-Year Nonresident                                Utah   
+        1839      2014  Full-Year Nonresident                             Vermont   
+        1840      2014  Full-Year Nonresident                            Virginia   
+        1841      2014  Full-Year Nonresident                          Washington   
+        1842      2014  Full-Year Nonresident                       West Virginia   
+        1843      2014  Full-Year Nonresident                           Wisconsin   
+        1844      2014  Full-Year Nonresident                             Wyoming   
+        1845      2014  Full-Year Nonresident                        A.P.O./F.P.O   
+        1846      2014  Full-Year Nonresident                              Canada   
+        1847      2014  Full-Year Nonresident                               China   
+        1848      2014  Full-Year Nonresident                              France   
+        1849      2014  Full-Year Nonresident                             Germany   
+        1850      2014  Full-Year Nonresident                               India   
+        1851      2014  Full-Year Nonresident                             Ireland   
+        1852      2014  Full-Year Nonresident                              Israel   
+        1853      2014  Full-Year Nonresident                               Italy   
+        1854      2014  Full-Year Nonresident                               Japan   
+        1855      2014  Full-Year Nonresident                              Mexico   
+        1856      2014  Full-Year Nonresident                         Puerto Rico   
+        1857      2014  Full-Year Nonresident                            S. Korea   
+        1858      2014  Full-Year Nonresident                      United Kingdom   
+        1859      2014  Full-Year Nonresident             All Other Countries +++   
+        1860      2014  Full-Year Nonresident              Residence Unknown ++++   
+        1861      2014  Full-Year Nonresident  Grand Total, Full-Year Nonresident   
+        1862      2014     Part-Year Resident     Grand Total, Part-Year Resident   
+        1863      2014     Grand Total, Total                  Grand Total, Total   
+        
+                              Country                     State  \textbackslash{}
+        0               United States                  New York   
+        1               United States                  New York   
+        2               United States                  New York   
+        3               United States                  New York   
+        4               United States                  New York   
+        5               United States                  New York   
+        6               United States                  New York   
+        7               United States                  New York   
+        8               United States                  New York   
+        9               United States                  New York   
+        10              United States                  New York   
+        11              United States                  New York   
+        12              United States                  New York   
+        13              United States                  New York   
+        14              United States                  New York   
+        15              United States                  New York   
+        16              United States                  New York   
+        17              United States                  New York   
+        18              United States                  New York   
+        19              United States                  New York   
+        20              United States                  New York   
+        21              United States                  New York   
+        22              United States                  New York   
+        23              United States                  New York   
+        24              United States                  New York   
+        25              United States                  New York   
+        26              United States                  New York   
+        27              United States                  New York   
+        28              United States                  New York   
+        29              United States                  New York   
+        {\ldots}                       {\ldots}                       {\ldots}   
+        1834            United States            South Carolina   
+        1835            United States              South Dakota   
+        1836            United States                 Tennessee   
+        1837            United States                     Texas   
+        1838            United States                      Utah   
+        1839            United States                   Vermont   
+        1840            United States                  Virginia   
+        1841            United States                Washington   
+        1842            United States             West Virginia   
+        1843            United States                 Wisconsin   
+        1844            United States                   Wyoming   
+        1845             A.P.O./F.P.O                       All   
+        1846                   Canada            Not Applicable   
+        1847                    China            Not Applicable   
+        1848                   France            Not Applicable   
+        1849                  Germany            Not Applicable   
+        1850                    India            Not Applicable   
+        1851                  Ireland            Not Applicable   
+        1852                   Israel            Not Applicable   
+        1853                    Italy            Not Applicable   
+        1854                    Japan            Not Applicable   
+        1855                   Mexico            Not Applicable   
+        1856              Puerto Rico            Not Applicable   
+        1857                 S. Korea            Not Applicable   
+        1858           United Kingdom            Not Applicable   
+        1859  All Other Countries +++            Not Applicable   
+        1860   Residence Unknown ++++            Not Applicable   
+        1861                      All  All - Excluding New York   
+        1862                      All  All - Excluding New York   
+        1863                      All                       All   
+        
+                                          County  Disclosure Number of All Returns  \textbackslash{}
+        0                                  Bronx         NaN               588,674   
+        1                                  Kings         NaN             1,078,520   
+        2                              Manhattan         NaN               808,917   
+        3                                 Queens         NaN             1,028,443   
+        4                               Richmond         NaN               204,587   
+        5                   Total, New York City         NaN             3,709,141   
+        6                                 Albany         NaN               140,676   
+        7                               Allegany         NaN                18,197   
+        8                                 Broome         NaN                88,141   
+        9                            Cattaraugus         NaN                33,328   
+        10                                Cayuga         NaN                33,148   
+        11                            Chautauqua         NaN                55,771   
+        12                               Chemung         NaN                38,365   
+        13                              Chenango         NaN                22,054   
+        14                               Clinton         NaN                35,374   
+        15                              Columbia         NaN                27,717   
+        16                              Cortland         NaN                19,968   
+        17                              Delaware         NaN                18,407   
+        18                              Dutchess         NaN               131,048   
+        19                                  Erie         NaN               419,875   
+        20                                 Essex         NaN                16,221   
+        21                              Franklin         NaN                19,232   
+        22                                Fulton         NaN                22,897   
+        23                               Genesee         NaN                27,555   
+        24                                Greene         NaN                21,309   
+        25                              Hamilton         NaN                 2,339   
+        26                              Herkimer         NaN                27,228   
+        27                             Jefferson         NaN                41,472   
+        28                                 Lewis         NaN                10,182   
+        29                            Livingston         NaN                26,917   
+        {\ldots}                                  {\ldots}         {\ldots}                   {\ldots}   
+        1834                                 All         NaN                 5,117   
+        1835                                 All         NaN                   233   
+        1836                                 All         NaN                 3,544   
+        1837                                 All         NaN                15,033   
+        1838                                 All         NaN                 1,492   
+        1839                                 All         NaN                 5,631   
+        1840                                 All         NaN                14,118   
+        1841                                 All         NaN                 4,448   
+        1842                                 All         NaN                   574   
+        1843                                 All         NaN                 2,418   
+        1844                                 All         NaN                   346   
+        1845                                 All         NaN                 1,832   
+        1846                      Not Applicable         NaN                 3,893   
+        1847                      Not Applicable         NaN                 3,340   
+        1848                      Not Applicable         NaN                 1,065   
+        1849                      Not Applicable         NaN                19,423   
+        1850                      Not Applicable         NaN                 1,945   
+        1851                      Not Applicable         NaN                   971   
+        1852                      Not Applicable         NaN                 1,650   
+        1853                      Not Applicable         NaN                   602   
+        1854                      Not Applicable         NaN                   807   
+        1855                      Not Applicable         NaN                   246   
+        1856                      Not Applicable         NaN                   437   
+        1857                      Not Applicable         NaN                   285   
+        1858                      Not Applicable         NaN                 4,405   
+        1859                      Not Applicable         NaN                 8,439   
+        1860                      Not Applicable         NaN                34,607   
+        1861  Grand Total, Full-Year Nonresident         NaN               940,499   
+        1862     Grand Total, Part-Year Resident         NaN               250,589   
+        1863                  Grand Total, Total         NaN            10,273,274   
+        
+             NY AGI of All Returns (in thousands) *  \textbackslash{}
+        0                                17,626,369   
+        1                                48,145,626   
+        2                               129,181,676   
+        3                                41,248,512   
+        4                                11,442,144   
+        5                               247,644,328   
+        6                                 7,677,295   
+        7                                   663,809   
+        8                                 3,625,446   
+        9                                 1,188,768   
+        10                                1,345,517   
+        11                                1,994,202   
+        12                                1,658,058   
+        13                                  780,744   
+        14                                1,424,591   
+        15                                1,300,932   
+        16                                  784,000   
+        17                                  657,108   
+        18                                7,905,657   
+        19                               20,284,106   
+        20                                  624,430   
+        21                                  677,948   
+        22                                  834,318   
+        23                                1,240,365   
+        24                                  969,966   
+        25                                   83,925   
+        26                                  975,416   
+        27                                1,587,502   
+        28                                  382,310   
+        29                                1,140,729   
+        {\ldots}                                     {\ldots}   
+        1834                           2,447,996.70   
+        1835                             450,380.22   
+        1836                           4,401,231.95   
+        1837                          20,198,064.27   
+        1838                           1,309,805.76   
+        1839                             888,577.31   
+        1840                           8,698,142.09   
+        1841                           8,769,341.08   
+        1842                             126,563.23   
+        1843                           1,798,760.31   
+        1844                           1,917,637.93   
+        1845                              48,856.39   
+        1846                             913,171.79   
+        1847                           1,068,039.46   
+        1848                             414,883.26   
+        1849                             372,613.20   
+        1850                             170,718.93   
+        1851                              48,950.89   
+        1852                             273,693.56   
+        1853                              61,745.12   
+        1854                             300,549.55   
+        1855                              43,091.05   
+        1856                              58,345.74   
+        1857                              55,712.45   
+        1858                           3,805,779.05   
+        1859                           1,916,423.99   
+        1860                           5,997,389.76   
+        1861                         412,878,504.17   
+        1862                          22,380,662.63   
+        1863                       1,108,918,638.75   
+        
+             Tax Liability of All Returns (in thousands) **        {\ldots}         \textbackslash{}
+        0                                           433,593        {\ldots}          
+        1                                         1,989,456        {\ldots}          
+        2                                         9,465,286        {\ldots}          
+        3                                         1,512,781        {\ldots}          
+        4                                           494,959        {\ldots}          
+        5                                        13,896,076        {\ldots}          
+        6                                           368,534        {\ldots}          
+        7                                            21,063        {\ldots}          
+        8                                           136,304        {\ldots}          
+        9                                            37,752        {\ldots}          
+        10                                           49,053        {\ldots}          
+        11                                           63,104        {\ldots}          
+        12                                           63,999        {\ldots}          
+        13                                           25,072        {\ldots}          
+        14                                           53,186        {\ldots}          
+        15                                           59,615        {\ldots}          
+        16                                           26,933        {\ldots}          
+        17                                           22,405        {\ldots}          
+        18                                          368,085        {\ldots}          
+        19                                          898,447        {\ldots}          
+        20                                           23,951        {\ldots}          
+        21                                           22,435        {\ldots}          
+        22                                           27,299        {\ldots}          
+        23                                           52,813        {\ldots}          
+        24                                           42,969        {\ldots}          
+        25                                            3,177        {\ldots}          
+        26                                           31,133        {\ldots}          
+        27                                           56,320        {\ldots}          
+        28                                           12,070        {\ldots}          
+        29                                           42,535        {\ldots}          
+        {\ldots}                                             {\ldots}        {\ldots}          
+        1834                                      17,681.10        {\ldots}          
+        1835                                        505.452        {\ldots}          
+        1836                                      10,577.03        {\ldots}          
+        1837                                      64,705.55        {\ldots}          
+        1838                                       6,030.43        {\ldots}          
+        1839                                      14,712.39        {\ldots}          
+        1840                                      63,068.91        {\ldots}          
+        1841                                      10,984.32        {\ldots}          
+        1842                                        641.453        {\ldots}          
+        1843                                       7,659.86        {\ldots}          
+        1844                                       2,733.26        {\ldots}          
+        1845                                        389.177        {\ldots}          
+        1846                                      16,541.41        {\ldots}          
+        1847                                      10,670.98        {\ldots}          
+        1848                                      12,778.41        {\ldots}          
+        1849                                       8,164.09        {\ldots}          
+        1850                                       2,262.47        {\ldots}          
+        1851                                       1,326.25        {\ldots}          
+        1852                                       6,888.35        {\ldots}          
+        1853                                       2,211.83        {\ldots}          
+        1854                                       7,598.88        {\ldots}          
+        1855                                       1,396.10        {\ldots}          
+        1856                                        653.633        {\ldots}          
+        1857                                        919.731        {\ldots}          
+        1858                                      64,284.57        {\ldots}          
+        1859                                      33,462.99        {\ldots}          
+        1860                                     140,029.65        {\ldots}          
+        1861                                   6,184,371.83        {\ldots}          
+        1862                                     715,805.23        {\ldots}          
+        1863                                  41,911,952.53        {\ldots}          
+        
+             Tax Liability of Taxable Returns (in thousands) **  \textbackslash{}
+        0                                               598,802   
+        1                                             2,239,988   
+        2                                             9,552,543   
+        3                                             1,694,491   
+        4                                               518,404   
+        5                                            14,604,228   
+        6                                               385,117   
+        7                                                24,125   
+        8                                               155,152   
+        9                                                43,722   
+        10                                               54,581   
+        11                                               73,047   
+        12                                               69,932   
+        13                                               28,850   
+        14                                               57,550   
+        15                                               62,837   
+        16                                               30,486   
+        17                                               25,207   
+        18                                              380,101   
+        19                                              953,392   
+        20                                               26,101   
+        21                                               26,041   
+        22                                               31,224   
+        23                                               56,554   
+        24                                               45,193   
+        25                                                3,385   
+        26                                               35,857   
+        27                                               63,552   
+        28                                               14,002   
+        29                                               46,234   
+        {\ldots}                                                 {\ldots}   
+        1834                                          18,036.27   
+        1835                                            505.452   
+        1836                                          10,577.43   
+        1837                                          64,816.51   
+        1838                                           6,072.47   
+        1839                                          14,742.32   
+        1840                                          63,142.08   
+        1841                                          11,002.83   
+        1842                                            644.075   
+        1843                                           7,664.45   
+        1844                                           2,733.26   
+        1845                                            390.847   
+        1846                                          16,555.10   
+        1847                                          10,671.22   
+        1848                                          12,781.01   
+        1849                                           8,164.33   
+        1850                                           2,262.47   
+        1851                                           1,326.25   
+        1852                                           7,001.81   
+        1853                                           2,214.19   
+        1854                                           7,598.88   
+        1855                                           1,396.10   
+        1856                                            653.633   
+        1857                                            919.731   
+        1858                                          64,284.57   
+        1859                                          33,471.34   
+        1860                                         141,002.23   
+        1861                                       6,204,904.23   
+        1862                                         723,617.74   
+        1863                                      43,342,022.01   
+        
+             Number of Nontaxable Returns  \textbackslash{}
+        0                         288,854   
+        1                         442,320   
+        2                         233,305   
+        3                         401,167   
+        4                          63,647   
+        5                       1,429,293   
+        6                          42,477   
+        7                           7,048   
+        8                          30,957   
+        9                          12,691   
+        10                         11,144   
+        11                         21,534   
+        12                         13,724   
+        13                          8,197   
+        14                         11,762   
+        15                          9,383   
+        16                          6,699   
+        17                          7,319   
+        18                         36,930   
+        19                        133,236   
+        20                          5,874   
+        21                          7,278   
+        22                          8,291   
+        23                          8,858   
+        24                          7,304   
+        25                            927   
+        26                          9,609   
+        27                         14,787   
+        28                          3,610   
+        29                          8,544   
+        {\ldots}                           {\ldots}   
+        1834                        1,850   
+        1835                           84   
+        1836                        1,062   
+        1837                        3,784   
+        1838                          438   
+        1839                        1,112   
+        1840                        3,962   
+        1841                        1,436   
+        1842                          160   
+        1843                          437   
+        1844                          115   
+        1845                        1,455   
+        1846                          918   
+        1847                        1,519   
+        1848                          382   
+        1849                       16,882   
+        1850                          755   
+        1851                          717   
+        1852                          850   
+        1853                          335   
+        1854                          312   
+        1855                           83   
+        1856                          203   
+        1857                          132   
+        1858                        1,506   
+        1859                        4,282   
+        1860                       12,501   
+        1861                      180,302   
+        1862                       55,430   
+        1863                    3,246,172   
+        
+             NY AGI of Nontaxable Returns (in thousands) *  \textbackslash{}
+        0                                        2,906,845   
+        1                                        3,841,481   
+        2                                       -3,220,186   
+        3                                        3,726,818   
+        4                                          440,492   
+        5                                        7,695,450   
+        6                                          315,183   
+        7                                           69,387   
+        8                                          244,546   
+        9                                          117,077   
+        10                                         102,974   
+        11                                         204,520   
+        12                                         134,959   
+        13                                          74,964   
+        14                                          96,808   
+        15                                            -874   
+        16                                          66,119   
+        17                                          54,912   
+        18                                         253,114   
+        19                                       1,111,857   
+        20                                          30,099   
+        21                                          56,801   
+        22                                          80,904   
+        23                                          74,849   
+        24                                          49,026   
+        25                                           5,492   
+        26                                          89,387   
+        27                                         122,527   
+        28                                          37,631   
+        29                                          78,428   
+        {\ldots}                                            {\ldots}   
+        1834                                    892,634.14   
+        1835                                     85,401.56   
+        1836                                  2,282,922.12   
+        1837                                  4,968,060.32   
+        1838                                    223,785.27   
+        1839                                    121,100.61   
+        1840                                    949,851.81   
+        1841                                  1,944,754.52   
+        1842                                     20,164.02   
+        1843                                    100,786.98   
+        1844                                    159,646.13   
+        1845                                     27,087.88   
+        1846                                     34,779.01   
+        1847                                    156,626.73   
+        1848                                     12,013.88   
+        1849                                     71,568.18   
+        1850                                     19,710.76   
+        1851                                      9,246.81   
+        1852                                     12,944.03   
+        1853                                     -4,480.32   
+        1854                                      9,350.96   
+        1855                                      2,865.53   
+        1856                                    -21,544.65   
+        1857                                     17,268.26   
+        1858                                    297,271.21   
+        1859                                    196,349.16   
+        1860                                    638,330.35   
+        1861                                 65,475,315.90   
+        1862                                  1,278,749.50   
+        1863                                 86,830,941.73   
+        
+             Tax Liability of Nontaxable Returns (in thousands) **  \textbackslash{}
+        0                                              -165,209      
+        1                                              -250,532      
+        2                                               -87,257      
+        3                                              -181,709      
+        4                                               -23,445      
+        5                                              -708,153      
+        6                                               -16,584      
+        7                                                -3,062      
+        8                                               -18,849      
+        9                                                -5,970      
+        10                                               -5,528      
+        11                                               -9,943      
+        12                                               -5,934      
+        13                                               -3,778      
+        14                                               -4,364      
+        15                                               -3,222      
+        16                                               -3,553      
+        17                                               -2,802      
+        18                                              -12,017      
+        19                                              -54,946      
+        20                                               -2,150      
+        21                                               -3,606      
+        22                                               -3,925      
+        23                                               -3,740      
+        24                                               -2,223      
+        25                                                 -208      
+        26                                               -4,724      
+        27                                               -7,232      
+        28                                               -1,932      
+        29                                               -3,698      
+        {\ldots}                                                 {\ldots}      
+        1834                                           -355.169      
+        1835                                                  0      
+        1836                                             -0.404      
+        1837                                            -110.96      
+        1838                                            -42.034      
+        1839                                            -29.926      
+        1840                                            -73.165      
+        1841                                            -18.508      
+        1842                                             -2.622      
+        1843                                             -4.593      
+        1844                                                  0      
+        1845                                              -1.67      
+        1846                                            -13.682      
+        1847                                             -0.235      
+        1848                                               -2.6      
+        1849                                             -0.239      
+        1850                                                  0      
+        1851                                                  0      
+        1852                                           -113.459      
+        1853                                             -2.353      
+        1854                                                  0      
+        1855                                                  0      
+        1856                                                  0      
+        1857                                                  0      
+        1858                                                  0      
+        1859                                             -8.355      
+        1860                                           -972.581      
+        1861                                         -20,532.41      
+        1862                                          -7,812.51      
+        1863                                      -1,430,069.49      
+        
+             Average NY AGI of All Returns Average Tax of All Returns  \textbackslash{}
+        0                           29,942                        737   
+        1                           44,640                      1,845   
+        2                          159,697                     11,701   
+        3                           40,108                      1,471   
+        4                           55,928                      2,419   
+        5                           66,766                      3,746   
+        6                           54,574                      2,620   
+        7                           36,479                      1,157   
+        8                           41,132                      1,546   
+        9                           35,669                      1,133   
+        10                          40,591                      1,480   
+        11                          35,757                      1,131   
+        12                          43,218                      1,668   
+        13                          35,401                      1,137   
+        14                          40,272                      1,504   
+        15                          46,936                      2,151   
+        16                          39,263                      1,349   
+        17                          35,699                      1,217   
+        18                          60,326                      2,809   
+        19                          48,310                      2,140   
+        20                          38,495                      1,477   
+        21                          35,251                      1,167   
+        22                          36,438                      1,192   
+        23                          45,014                      1,917   
+        24                          45,519                      2,016   
+        25                          35,881                      1,358   
+        26                          35,824                      1,143   
+        27                          38,279                      1,358   
+        28                          37,548                      1,185   
+        29                          42,379                      1,580   
+        {\ldots}                            {\ldots}                        {\ldots}   
+        1834                       478,405                      3,455   
+        1835                     1,932,962                      2,169   
+        1836                     1,241,883                      2,984   
+        1837                     1,343,582                      4,304   
+        1838                       877,886                      4,042   
+        1839                       157,801                      2,613   
+        1840                       616,103                      4,467   
+        1841                     1,971,525                      2,469   
+        1842                       220,493                      1,118   
+        1843                       743,904                      3,168   
+        1844                     5,542,306                      7,900   
+        1845                        26,668                        212   
+        1846                       234,568                      4,249   
+        1847                       319,772                      3,195   
+        1848                       389,562                     11,999   
+        1849                        19,184                        420   
+        1850                        87,773                      1,163   
+        1851                        50,413                      1,366   
+        1852                       165,875                      4,175   
+        1853                       102,567                      3,674   
+        1854                       372,428                      9,416   
+        1855                       175,167                      5,675   
+        1856                       133,514                      1,496   
+        1857                       195,482                      3,227   
+        1858                       863,968                     14,594   
+        1859                       227,091                      3,965   
+        1860                       173,300                      4,046   
+        1861                       438,999                      6,576   
+        1862                        89,312                      2,856   
+        1863                       107,942                      4,080   
+        
+             Average NY AGI of Taxable Returns Average Tax of Taxable Returns  \textbackslash{}
+        0                               49,095                          1,997   
+        1                               69,639                          3,521   
+        2                              230,019                         16,595   
+        3                               59,817                          2,701   
+        4                               78,059                          3,678   
+        5                              105,248                          6,406   
+        6                               74,971                          3,922   
+        7                               53,316                          2,164   
+        8                               59,123                          2,713   
+        9                               51,931                          2,119   
+        10                              56,469                          2,481   
+        11                              52,273                          2,134   
+        12                              61,812                          2,838   
+        13                              50,933                          2,082   
+        14                              56,233                          2,437   
+        15                              71,005                          3,427   
+        16                              54,102                          2,298   
+        17                              54,311                          2,273   
+        18                              81,308                          4,039   
+        19                              66,886                          3,326   
+        20                              57,440                          2,523   
+        21                              51,961                          2,178   
+        22                              51,583                          2,138   
+        23                              62,337                          3,025   
+        24                              65,758                          3,227   
+        25                              55,548                          2,397   
+        26                              50,288                          2,035   
+        27                              54,899                          2,382   
+        28                              52,447                          2,131   
+        29                              57,819                          2,516   
+        {\ldots}                                {\ldots}                            {\ldots}   
+        1834                           476,083                          5,521   
+        1835                         2,449,521                          3,392   
+        1836                           853,469                          4,262   
+        1837                         1,353,898                          5,762   
+        1838                         1,030,380                          5,761   
+        1839                           169,833                          3,262   
+        1840                           762,927                          6,217   
+        1841                         2,265,799                          3,653   
+        1842                           257,003                          1,556   
+        1843                           857,129                          3,869   
+        1844                         7,610,354                         11,832   
+        1845                            57,741                          1,037   
+        1846                           295,258                          5,565   
+        1847                           500,501                          5,860   
+        1848                           589,853                         18,713   
+        1849                           118,475                          3,213   
+        1850                           126,898                          1,901   
+        1851                           156,315                          5,221   
+        1852                           325,937                          8,752   
+        1853                           248,035                          8,293   
+        1854                           588,280                         15,351   
+        1855                           246,782                          8,565   
+        1856                           341,412                          2,793   
+        1857                           251,269                          6,011   
+        1858                         1,210,248                         22,175   
+        1859                           413,778                          8,052   
+        1860                           242,426                          6,378   
+        1861                           456,991                          8,162   
+        1862                           108,127                          3,708   
+        1863                           145,449                          6,168   
+        
+             Average NY AGI of Nontaxable Returns County Sort Order  
+        0                                  10,063                 1  
+        1                                   8,685                 2  
+        2                                 -13,802                 3  
+        3                                   9,290                 4  
+        4                                   6,921                 5  
+        5                                   5,384                 6  
+        6                                   7,420                 7  
+        7                                   9,845                 8  
+        8                                   7,900                 9  
+        9                                   9,225                10  
+        10                                  9,240                11  
+        11                                  9,498                12  
+        12                                  9,834                13  
+        13                                  9,145                14  
+        14                                  8,231                15  
+        15                                    -93                16  
+        16                                  9,870                17  
+        17                                  7,503                18  
+        18                                  6,854                19  
+        19                                  8,345                20  
+        20                                  5,124                21  
+        21                                  7,805                22  
+        22                                  9,758                23  
+        23                                  8,450                24  
+        24                                  6,712                25  
+        25                                  5,925                26  
+        26                                  9,302                27  
+        27                                  8,286                28  
+        28                                 10,424                29  
+        29                                  9,179                30  
+        {\ldots}                                   {\ldots}               {\ldots}  
+        1834                              482,505               139  
+        1835                            1,016,685               140  
+        1836                            2,149,644               141  
+        1837                            1,312,912               142  
+        1838                              510,925               143  
+        1839                              108,903               144  
+        1840                              239,740               145  
+        1841                            1,354,286               146  
+        1842                              126,025               147  
+        1843                              230,634               148  
+        1844                            1,388,227               149  
+        1845                               18,617               150  
+        1846                               37,886               200  
+        1847                              103,112               201  
+        1848                               31,450               202  
+        1849                                4,239               203  
+        1850                               26,107               204  
+        1851                               12,897               205  
+        1852                               15,228               206  
+        1853                              -13,374               207  
+        1854                               29,971               208  
+        1855                               34,524               209  
+        1856                             -106,131               210  
+        1857                              130,820               211  
+        1858                              197,391               212  
+        1859                               45,855               213  
+        1860                               51,062               214  
+        1861                              363,142               215  
+        1862                               23,070               250  
+        1863                               26,749               299  
+        
+        [1864 rows x 22 columns]
+\end{Verbatim}
+            
+    Data Set 2 Link:
+https://data.ny.gov/Government-Finance/Income-Tax-Components-by-Size-of-Income-by-Place-o/5bb2-yb85
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{df2} \PY{o}{=} \PY{n}{pnd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{PersonalIncomeBrackets.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{df2}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}4}]:}        Tax Year          Resident Type                  Place of Residence  \textbackslash{}
+        0          2012  Full-Year Nonresident                             Ireland   
+        1          2012  Full-Year Nonresident                             Ireland   
+        2          2012  Full-Year Nonresident                             Ireland   
+        3          2012  Full-Year Nonresident                        A.P.O./F.P.O   
+        4          2012  Full-Year Nonresident                        A.P.O./F.P.O   
+        5          2012  Full-Year Nonresident                        A.P.O./F.P.O   
+        6          2012  Full-Year Nonresident                        A.P.O./F.P.O   
+        7          2012  Full-Year Nonresident                        A.P.O./F.P.O   
+        8          2012  Full-Year Nonresident                        A.P.O./F.P.O   
+        9          2012  Full-Year Nonresident                        A.P.O./F.P.O   
+        10         2012  Full-Year Nonresident                        A.P.O./F.P.O   
+        11         2012  Full-Year Nonresident                        A.P.O./F.P.O   
+        12         2012  Full-Year Nonresident                        A.P.O./F.P.O   
+        13         2012  Full-Year Nonresident                        A.P.O./F.P.O   
+        14         2012  Full-Year Nonresident                        A.P.O./F.P.O   
+        15         2012  Full-Year Nonresident                        A.P.O./F.P.O   
+        16         2012  Full-Year Nonresident                        A.P.O./F.P.O   
+        17         2012  Full-Year Nonresident                              Canada   
+        18         2012  Full-Year Nonresident                              Canada   
+        19         2012  Full-Year Nonresident                              Canada   
+        20         2012  Full-Year Nonresident                              Canada   
+        21         2012  Full-Year Nonresident                              Canada   
+        22         2012  Full-Year Nonresident                              Canada   
+        23         2012  Full-Year Nonresident                              Canada   
+        24         2012  Full-Year Nonresident                              Canada   
+        25         2012  Full-Year Nonresident                              Canada   
+        26         2012  Full-Year Nonresident                              Canada   
+        27         2012  Full-Year Nonresident                              Canada   
+        28         2012  Full-Year Nonresident                              Canada   
+        29         2012  Full-Year Nonresident                              Mexico   
+        {\ldots}         {\ldots}                    {\ldots}                                 {\ldots}   
+        23705      2014  Full-Year Nonresident              Residence Unknown ++++   
+        23706      2014  Full-Year Nonresident              Residence Unknown ++++   
+        23707      2014  Full-Year Nonresident  Grand Total, Full-Year Nonresident   
+        23708      2014  Full-Year Nonresident  Grand Total, Full-Year Nonresident   
+        23709      2014  Full-Year Nonresident  Grand Total, Full-Year Nonresident   
+        23710      2014  Full-Year Nonresident  Grand Total, Full-Year Nonresident   
+        23711      2014  Full-Year Nonresident  Grand Total, Full-Year Nonresident   
+        23712      2014  Full-Year Nonresident  Grand Total, Full-Year Nonresident   
+        23713      2014  Full-Year Nonresident  Grand Total, Full-Year Nonresident   
+        23714      2014  Full-Year Nonresident  Grand Total, Full-Year Nonresident   
+        23715      2014  Full-Year Nonresident  Grand Total, Full-Year Nonresident   
+        23716      2014  Full-Year Nonresident  Grand Total, Full-Year Nonresident   
+        23717      2014  Full-Year Nonresident  Grand Total, Full-Year Nonresident   
+        23718      2014  Full-Year Nonresident  Grand Total, Full-Year Nonresident   
+        23719      2014  Full-Year Nonresident  Grand Total, Full-Year Nonresident   
+        23720      2014  Full-Year Nonresident  Grand Total, Full-Year Nonresident   
+        23721      2014     Part-Year Resident     Grand Total, Part-Year Resident   
+        23722      2014     Part-Year Resident     Grand Total, Part-Year Resident   
+        23723      2014     Part-Year Resident     Grand Total, Part-Year Resident   
+        23724      2014     Part-Year Resident     Grand Total, Part-Year Resident   
+        23725      2014     Part-Year Resident     Grand Total, Part-Year Resident   
+        23726      2014     Part-Year Resident     Grand Total, Part-Year Resident   
+        23727      2014     Part-Year Resident     Grand Total, Part-Year Resident   
+        23728      2014     Part-Year Resident     Grand Total, Part-Year Resident   
+        23729      2014     Part-Year Resident     Grand Total, Part-Year Resident   
+        23730      2014     Part-Year Resident     Grand Total, Part-Year Resident   
+        23731      2014     Part-Year Resident     Grand Total, Part-Year Resident   
+        23732      2014     Part-Year Resident     Grand Total, Part-Year Resident   
+        23733      2014     Part-Year Resident     Grand Total, Part-Year Resident   
+        23734      2014     Part-Year Resident     Grand Total, Part-Year Resident   
+        
+                              Country                     State  \textbackslash{}
+        0                     Ireland            Not Applicable   
+        1                     Ireland            Not Applicable   
+        2                     Ireland            Not Applicable   
+        3                A.P.O./F.P.O                       All   
+        4                A.P.O./F.P.O                       All   
+        5                A.P.O./F.P.O                       All   
+        6                A.P.O./F.P.O                       All   
+        7                A.P.O./F.P.O                       All   
+        8                A.P.O./F.P.O                       All   
+        9                A.P.O./F.P.O                       All   
+        10               A.P.O./F.P.O                       All   
+        11               A.P.O./F.P.O                       All   
+        12               A.P.O./F.P.O                       All   
+        13               A.P.O./F.P.O                       All   
+        14               A.P.O./F.P.O                       All   
+        15               A.P.O./F.P.O                       All   
+        16               A.P.O./F.P.O                       All   
+        17                     Canada            Not Applicable   
+        18                     Canada            Not Applicable   
+        19                     Canada            Not Applicable   
+        20                     Canada            Not Applicable   
+        21                     Canada            Not Applicable   
+        22                     Canada            Not Applicable   
+        23                     Canada            Not Applicable   
+        24                     Canada            Not Applicable   
+        25                     Canada            Not Applicable   
+        26                     Canada            Not Applicable   
+        27                     Canada            Not Applicable   
+        28                     Canada            Not Applicable   
+        29                     Mexico            Not Applicable   
+        {\ldots}                       {\ldots}                       {\ldots}   
+        23705  Residence Unknown ++++            Not Applicable   
+        23706  Residence Unknown ++++            Not Applicable   
+        23707                     All  All - Excluding New York   
+        23708                     All  All - Excluding New York   
+        23709                     All  All - Excluding New York   
+        23710                     All  All - Excluding New York   
+        23711                     All  All - Excluding New York   
+        23712                     All  All - Excluding New York   
+        23713                     All  All - Excluding New York   
+        23714                     All  All - Excluding New York   
+        23715                     All  All - Excluding New York   
+        23716                     All  All - Excluding New York   
+        23717                     All  All - Excluding New York   
+        23718                     All  All - Excluding New York   
+        23719                     All  All - Excluding New York   
+        23720                     All  All - Excluding New York   
+        23721                     All  All - Excluding New York   
+        23722                     All  All - Excluding New York   
+        23723                     All  All - Excluding New York   
+        23724                     All  All - Excluding New York   
+        23725                     All  All - Excluding New York   
+        23726                     All  All - Excluding New York   
+        23727                     All  All - Excluding New York   
+        23728                     All  All - Excluding New York   
+        23729                     All  All - Excluding New York   
+        23730                     All  All - Excluding New York   
+        23731                     All  All - Excluding New York   
+        23732                     All  All - Excluding New York   
+        23733                     All  All - Excluding New York   
+        23734                     All  All - Excluding New York   
+        
+                                           County       Income Class Disclosure  \textbackslash{}
+        0                          Not Applicable    40,000 - 49,999         d/   
+        1                          Not Applicable    50,000 - 59,999         d/   
+        2                          Not Applicable    60,000 - 74,999         d/   
+        3                                     All        Under 5,000        NaN   
+        4                                     All      5,000 - 9,999        NaN   
+        5                                     All    10,000 - 19,999        NaN   
+        6                                     All    20,000 - 29,999        NaN   
+        7                                     All    30,000 - 39,999        NaN   
+        8                                     All    40,000 - 49,999        NaN   
+        9                                     All    50,000 - 59,999        NaN   
+        10                                    All    60,000 - 74,999        NaN   
+        11                                    All    75,000 - 99,999        NaN   
+        12                                    All  100,000 - 199,999        NaN   
+        13                                    All  200,000 - 249,999         d/   
+        14                                    All  250,000 - 499,999        NaN   
+        15                                    All   500,000 and over         d/   
+        16                                    All              Total        NaN   
+        17                         Not Applicable        Under 5,000        NaN   
+        18                         Not Applicable      5,000 - 9,999        NaN   
+        19                         Not Applicable    10,000 - 19,999        NaN   
+        20                         Not Applicable    20,000 - 29,999        NaN   
+        21                         Not Applicable    30,000 - 39,999        NaN   
+        22                         Not Applicable    40,000 - 49,999        NaN   
+        23                         Not Applicable    50,000 - 59,999        NaN   
+        24                         Not Applicable    60,000 - 74,999        NaN   
+        25                         Not Applicable    75,000 - 99,999        NaN   
+        26                         Not Applicable  100,000 - 199,999        NaN   
+        27                         Not Applicable  200,000 - 249,999        NaN   
+        28                         Not Applicable  250,000 - 499,999        NaN   
+        29                         Not Applicable    20,000 - 29,999         d/   
+        {\ldots}                                   {\ldots}                {\ldots}        {\ldots}   
+        23705                      Not Applicable   500,000 and over        NaN   
+        23706                      Not Applicable              Total        NaN   
+        23707  Grand Total, Full-Year Nonresident        Under 5,000        NaN   
+        23708  Grand Total, Full-Year Nonresident      5,000 - 9,999        NaN   
+        23709  Grand Total, Full-Year Nonresident    10,000 - 19,999        NaN   
+        23710  Grand Total, Full-Year Nonresident    20,000 - 29,999        NaN   
+        23711  Grand Total, Full-Year Nonresident    30,000 - 39,999        NaN   
+        23712  Grand Total, Full-Year Nonresident    40,000 - 49,999        NaN   
+        23713  Grand Total, Full-Year Nonresident    50,000 - 59,999        NaN   
+        23714  Grand Total, Full-Year Nonresident    60,000 - 74,999        NaN   
+        23715  Grand Total, Full-Year Nonresident    75,000 - 99,999        NaN   
+        23716  Grand Total, Full-Year Nonresident  100,000 - 199,999        NaN   
+        23717  Grand Total, Full-Year Nonresident  200,000 - 249,999        NaN   
+        23718  Grand Total, Full-Year Nonresident  250,000 - 499,999        NaN   
+        23719  Grand Total, Full-Year Nonresident   500,000 and over        NaN   
+        23720  Grand Total, Full-Year Nonresident              Total        NaN   
+        23721     Grand Total, Part-Year Resident        Under 5,000        NaN   
+        23722     Grand Total, Part-Year Resident      5,000 - 9,999        NaN   
+        23723     Grand Total, Part-Year Resident    10,000 - 19,999        NaN   
+        23724     Grand Total, Part-Year Resident    20,000 - 29,999        NaN   
+        23725     Grand Total, Part-Year Resident    30,000 - 39,999        NaN   
+        23726     Grand Total, Part-Year Resident    40,000 - 49,999        NaN   
+        23727     Grand Total, Part-Year Resident    50,000 - 59,999        NaN   
+        23728     Grand Total, Part-Year Resident    60,000 - 74,999        NaN   
+        23729     Grand Total, Part-Year Resident    75,000 - 99,999        NaN   
+        23730     Grand Total, Part-Year Resident  100,000 - 199,999        NaN   
+        23731     Grand Total, Part-Year Resident  200,000 - 249,999        NaN   
+        23732     Grand Total, Part-Year Resident  250,000 - 499,999        NaN   
+        23733     Grand Total, Part-Year Resident   500,000 and over        NaN   
+        23734     Grand Total, Part-Year Resident              Total        NaN   
+        
+              Number of All Returns NY AGI of All Returns (in thousands) *  \textbackslash{}
+        0                       NaN                                    NaN   
+        1                       NaN                                    NaN   
+        2                       NaN                                    NaN   
+        3                       632                              -2,644.47   
+        4                        58                                432.807   
+        5                       194                               3,036.93   
+        6                       299                               7,270.07   
+        7                       178                               6,152.42   
+        8                        84                               3,739.27   
+        9                        73                               3,970.75   
+        10                       96                               6,458.87   
+        11                       81                               6,862.51   
+        12                       90                              12,201.63   
+        13                      NaN                                    NaN   
+        14                       12                               3,595.86   
+        15                      NaN                                    NaN   
+        16                    1,810                              66,076.30   
+        17                      515                              -9,068.19   
+        18                      179                               1,323.11   
+        19                      328                               4,782.00   
+        20                      253                               6,246.72   
+        21                      256                               8,914.34   
+        22                      195                               8,831.69   
+        23                      197                              10,811.13   
+        24                      230                              15,400.97   
+        25                      237                              20,362.45   
+        26                      369                              51,524.16   
+        27                       56                              12,571.80   
+        28                      163                              56,425.84   
+        29                      NaN                                    NaN   
+        {\ldots}                     {\ldots}                                    {\ldots}   
+        23705                 1,628                           4,313,383.12   
+        23706                34,607                           5,997,389.76   
+        23707                70,959                         -11,194,646.19   
+        23708                37,553                             278,415.61   
+        23709                60,093                             894,232.06   
+        23710                52,417                           1,305,778.74   
+        23711                48,930                           1,709,520.91   
+        23712                46,634                           2,096,476.82   
+        23713                43,978                           2,415,806.58   
+        23714                59,671                           4,019,822.73   
+        23715                83,856                           7,296,698.33   
+        23716               193,251                          27,531,868.87   
+        23717                48,349                          10,789,730.36   
+        23718                94,546                          32,766,932.64   
+        23719               100,262                         332,967,866.71   
+        23720               940,499                         412,878,504.17   
+        23721                16,632                            -111,102.32   
+        23722                19,424                             147,512.79   
+        23723                39,174                             584,808.52   
+        23724                32,209                             797,485.11   
+        23725                23,801                             827,238.60   
+        23726                18,880                             846,466.07   
+        23727                15,382                             842,927.86   
+        23728                17,405                           1,168,138.05   
+        23729                19,550                           1,693,148.69   
+        23730                30,146                           4,173,931.12   
+        23731                 5,567                           1,240,268.70   
+        23732                 8,311                           2,789,641.63   
+        23733                 4,108                           7,380,197.82   
+        23734               250,589                          22,380,662.63   
+        
+              Deductions of All Returns (in thousands)  \textbackslash{}
+        0                                          NaN   
+        1                                          NaN   
+        2                                          NaN   
+        3                                      105.089   
+        4                                      254.527   
+        5                                     1,231.65   
+        6                                     1,785.28   
+        7                                     1,186.02   
+        8                                          510   
+        9                                      299.475   
+        10                                     509.217   
+        11                                     251.298   
+        12                                     523.287   
+        13                                         NaN   
+        14                                     220.128   
+        15                                         NaN   
+        16                                    7,029.80   
+        17                                     488.399   
+        18                                    1,116.54   
+        19                                    2,498.60   
+        20                                    2,023.76   
+        21                                    2,285.94   
+        22                                    1,757.79   
+        23                                    1,857.11   
+        24                                    2,165.63   
+        25                                    2,381.96   
+        26                                    4,294.68   
+        27                                      638.97   
+        28                                    2,170.38   
+        29                                         NaN   
+        {\ldots}                                        {\ldots}   
+        23705                                63,185.23   
+        23706                               332,655.78   
+        23707                                78,870.69   
+        23708                               195,766.09   
+        23709                               452,447.66   
+        23710                               479,998.86   
+        23711                               499,190.64   
+        23712                               521,958.96   
+        23713                               530,633.50   
+        23714                               805,524.23   
+        23715                             1,327,540.93   
+        23716                             3,977,814.91   
+        23717                             1,135,165.58   
+        23718                             2,375,594.28   
+        23719                             6,303,174.09   
+        23720                            18,683,680.40   
+        23721                                28,176.12   
+        23722                               113,942.53   
+        23723                               307,093.32   
+        23724                               275,781.09   
+        23725                               217,947.41   
+        23726                               182,022.14   
+        23727                               156,193.30   
+        23728                               190,299.24   
+        23729                               237,481.88   
+        23730                               439,658.41   
+        23731                                95,851.12   
+        23732                               158,872.84   
+        23733                               103,803.02   
+        23734                             2,507,122.42   
+        
+              Dependent Exemptions of All Returns (in thousands)  \textbackslash{}
+        0                                                    NaN   
+        1                                                    NaN   
+        2                                                    NaN   
+        3                                                      0   
+        4                                                      0   
+        5                                                 35.233   
+        6                                                     81   
+        7                                                     76   
+        8                                                     19   
+        9                                                     14   
+        10                                                    44   
+        11                                                    10   
+        12                                                    42   
+        13                                                   NaN   
+        14                                                    10   
+        15                                                   NaN   
+        16                                               345.233   
+        17                                                     0   
+        18                                                     3   
+        19                                                38.551   
+        20                                                    63   
+        21                                                78.707   
+        22                                                87.437   
+        23                                                   106   
+        24                                                   125   
+        25                                                   164   
+        26                                                   242   
+        27                                                    33   
+        28                                                    86   
+        29                                                   NaN   
+        {\ldots}                                                  {\ldots}   
+        23705                                              1,200   
+        23706                                           8,232.38   
+        23707                                              4.859   
+        23708                                            202.699   
+        23709                                           9,831.28   
+        23710                                          18,013.97   
+        23711                                          19,300.55   
+        23712                                          20,237.69   
+        23713                                          20,769.76   
+        23714                                          31,440.89   
+        23715                                          54,957.47   
+        23716                                         178,014.51   
+        23717                                             53,138   
+        23718                                            110,668   
+        23719                                            117,484   
+        23720                                         634,063.67   
+        23721                                              0.348   
+        23722                                            201.316   
+        23723                                           7,239.22   
+        23724                                           7,811.74   
+        23725                                           5,714.92   
+        23726                                           4,545.73   
+        23727                                           3,866.85   
+        23728                                              5,222   
+        23729                                           7,239.12   
+        23730                                          14,967.59   
+        23731                                              3,651   
+        23732                                              6,093   
+        23733                                              3,683   
+        23734                                          70,235.83   
+        
+              Taxable Income of All Returns (in thousands)  \textbackslash{}
+        0                                              NaN   
+        1                                              NaN   
+        2                                              NaN   
+        3                                            1.904   
+        4                                           20.854   
+        5                                          661.395   
+        6                                         2,359.97   
+        7                                         1,917.60   
+        8                                         1,193.84   
+        9                                          730.973   
+        10                                        2,143.69   
+        11                                        1,320.02   
+        12                                        4,391.15   
+        13                                             NaN   
+        14                                        1,949.24   
+        15                                             NaN   
+        16                                       28,091.29   
+        17                                           5.056   
+        18                                         120.241   
+        19                                        2,028.95   
+        20                                        3,876.60   
+        21                                        6,302.78   
+        22                                        6,759.85   
+        23                                        8,574.19   
+        24                                       12,574.88   
+        25                                       16,846.58   
+        26                                       44,298.82   
+        27                                       10,727.75   
+        28                                       51,199.44   
+        29                                             NaN   
+        {\ldots}                                            {\ldots}   
+        23705                                 3,729,053.60   
+        23706                                 5,196,779.46   
+        23707                                     6,349.33   
+        23708                                    59,815.95   
+        23709                                   345,163.33   
+        23710                                   679,928.56   
+        23711                                 1,038,005.15   
+        23712                                 1,391,160.13   
+        23713                                 1,692,699.14   
+        23714                                 2,920,913.37   
+        23715                                 5,470,163.33   
+        23716                                21,788,667.48   
+        23717                                 8,943,862.31   
+        23718                                27,773,469.22   
+        23719                               268,824,150.21   
+        23720                               340,934,347.53   
+        23721                                     1,212.20   
+        23722                                    18,339.76   
+        23723                                   228,930.63   
+        23724                                   465,863.27   
+        23725                                   561,580.16   
+        23726                                   625,626.75   
+        23727                                   652,718.40   
+        23728                                   938,012.83   
+        23729                                 1,399,285.43   
+        23730                                 3,631,115.08   
+        23731                                 1,120,611.86   
+        23732                                 2,577,947.14   
+        23733                                 6,949,348.20   
+        23734                                19,170,591.71   
+        
+              Tax Before Credits of All Returns (in thousands)  \textbackslash{}
+        0                                                  NaN   
+        1                                                  NaN   
+        2                                                  NaN   
+        3                                                0.076   
+        4                                                0.833   
+        5                                               27.214   
+        6                                              105.395   
+        7                                               87.272   
+        8                                               57.203   
+        9                                               39.635   
+        10                                             117.191   
+        11                                              75.039   
+        12                                             279.214   
+        13                                                 NaN   
+        14                                             130.995   
+        15                                                 NaN   
+        16                                            1,874.65   
+        17                                               0.203   
+        18                                               4.817   
+        19                                               82.73   
+        20                                              179.61   
+        21                                             322.665   
+        22                                             368.396   
+        23                                             482.282   
+        24                                             727.719   
+        25                                             996.887   
+        26                                            2,859.51   
+        27                                             719.955   
+        28                                            3,496.44   
+        29                                                 NaN   
+        {\ldots}                                                {\ldots}   
+        23705                                       313,031.93   
+        23706                                       404,371.28   
+        23707                                          254.262   
+        23708                                         2,393.51   
+        23709                                       116,832.98   
+        23710                                        30,820.48   
+        23711                                        51,182.48   
+        23712                                        72,434.18   
+        23713                                        91,449.26   
+        23714                                       162,441.65   
+        23715                                       313,046.25   
+        23716                                     1,378,079.40   
+        23717                                       594,901.36   
+        23718                                     1,879,434.34   
+        23719                                    22,543,729.41   
+        23720                                    27,236,999.55   
+        23721                                           48.486   
+        23722                                          733.898   
+        23723                                         9,332.98   
+        23724                                        21,282.52   
+        23725                                        28,342.09   
+        23726                                        33,443.20   
+        23727                                        36,147.77   
+        23728                                        53,338.17   
+        23729                                        81,711.28   
+        23730                                       230,906.29   
+        23731                                        74,703.59   
+        23732                                       174,635.73   
+        23733                                       560,060.60   
+        23734                                     1,304,686.61   
+        
+              Tax Liability of All Returns (in thousands) **  \textbackslash{}
+        0                                                NaN   
+        1                                                NaN   
+        2                                                NaN   
+        3                                              0.049   
+        4                                              1.425   
+        5                                             23.048   
+        6                                             85.225   
+        7                                             56.488   
+        8                                             28.098   
+        9                                             18.415   
+        10                                            60.451   
+        11                                            25.112   
+        12                                            71.376   
+        13                                               NaN   
+        14                                            42.383   
+        15                                               NaN   
+        16                                           444.195   
+        17                                            -0.166   
+        18                                             2.409   
+        19                                            60.124   
+        20                                           140.297   
+        21                                           247.466   
+        22                                           305.646   
+        23                                           401.803   
+        24                                           543.946   
+        25                                           777.642   
+        26                                          1,888.32   
+        27                                            403.19   
+        28                                          1,497.12   
+        29                                               NaN   
+        {\ldots}                                              {\ldots}   
+        23705                                      82,517.02   
+        23706                                     140,029.65   
+        23707                                      -3,328.34   
+        23708                                       1,408.80   
+        23709                                      15,720.08   
+        23710                                      18,026.09   
+        23711                                      33,548.13   
+        23712                                      49,674.61   
+        23713                                      64,899.83   
+        23714                                     114,102.81   
+        23715                                     212,439.78   
+        23716                                     831,030.01   
+        23717                                     320,646.55   
+        23718                                     908,008.16   
+        23719                                   3,618,195.31   
+        23720                                   6,184,371.83   
+        23721                                       -477.905   
+        23722                                      -1,024.37   
+        23723                                        913.832   
+        23724                                      10,581.82   
+        23725                                      16,669.56   
+        23726                                      20,388.15   
+        23727                                      21,718.60   
+        23728                                      31,243.39   
+        23729                                      47,874.79   
+        23730                                     133,173.55   
+        23731                                      43,147.93   
+        23732                                     102,628.04   
+        23733                                     288,967.86   
+        23734                                     715,805.23   
+        
+               Place of Residence Sort Order  Income Class Sort Order  
+        0                                205                        6  
+        1                                205                        7  
+        2                                205                        8  
+        3                                150                        1  
+        4                                150                        2  
+        5                                150                        3  
+        6                                150                        4  
+        7                                150                        5  
+        8                                150                        6  
+        9                                150                        7  
+        10                               150                        8  
+        11                               150                        9  
+        12                               150                       10  
+        13                               150                       11  
+        14                               150                       12  
+        15                               150                       13  
+        16                               150                       14  
+        17                               200                        1  
+        18                               200                        2  
+        19                               200                        3  
+        20                               200                        4  
+        21                               200                        5  
+        22                               200                        6  
+        23                               200                        7  
+        24                               200                        8  
+        25                               200                        9  
+        26                               200                       10  
+        27                               200                       11  
+        28                               200                       12  
+        29                               209                        4  
+        {\ldots}                              {\ldots}                      {\ldots}  
+        23705                            214                       13  
+        23706                            214                       14  
+        23707                            215                        1  
+        23708                            215                        2  
+        23709                            215                        3  
+        23710                            215                        4  
+        23711                            215                        5  
+        23712                            215                        6  
+        23713                            215                        7  
+        23714                            215                        8  
+        23715                            215                        9  
+        23716                            215                       10  
+        23717                            215                       11  
+        23718                            215                       12  
+        23719                            215                       13  
+        23720                            215                       14  
+        23721                            250                        1  
+        23722                            250                        2  
+        23723                            250                        3  
+        23724                            250                        4  
+        23725                            250                        5  
+        23726                            250                        6  
+        23727                            250                        7  
+        23728                            250                        8  
+        23729                            250                        9  
+        23730                            250                       10  
+        23731                            250                       11  
+        23732                            250                       12  
+        23733                            250                       13  
+        23734                            250                       14  
+        
+        [23735 rows x 17 columns]
+\end{Verbatim}
+            
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
